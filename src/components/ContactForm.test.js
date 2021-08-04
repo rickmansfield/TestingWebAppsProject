@@ -19,11 +19,11 @@ test('renders the contact form header', ()=> {
 	const header = screen.queryByText(/contact form/i);
     console.log(header);
 	expect(header).toBeInTheDocument();//can use either
-    expect(header).toBeVisible();//can use either one
+    expect(header).toBeVisible();//can use any of these
     expect(header).toHaveTextContent(/contact form/i);
     expect(header).toBeTruthy();
     expect(header).not.toBeFalsy();
-
+//another example to just have plenty of options
     const h1 = screen.queryByTestId('testh1');
     expect(h1).toBeInTheDocument();//can also tag with an id and use any of these 
 });
