@@ -20,8 +20,11 @@ test('renders the contact form header', ()=> {
     console.log(header);
 	expect(header).toBeInTheDocument();//can use either
     expect(header).toBeVisible();//can use either one
+    expect(header).toHaveTextContent(/contact form/i);
+    expect(header).toBeTruthy();
+    expect(header).not.toBeFalsy();
+
     const h1 = screen.queryByTestId('testh1');
- 
     expect(h1).toBeInTheDocument();//can also tag with an id and use any of these 
 });
 
