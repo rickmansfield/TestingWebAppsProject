@@ -1,20 +1,18 @@
 import React from 'react';
 import {render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import ContactForm from './ContactForm';
 
-test("does the test 1", ()=>{
-    // throw new Error("This is an error")
-    console.log('doing a sanity test 1');
-});
+// test("This is a sanity test", ()=>{
+//     // throw new Error("This is an error")
+//     console.log('doing a sanity test');
+// });
 
-
-it('renders without errors', ()=>{
+it('1 renders without errors', ()=>{
     render(<ContactForm />);
 });
 
-test('renders the contact form header', ()=> {
+test('2 renders the contact form header', ()=> {
     render(<ContactForm />);
 	const header = screen.queryByText(/contact form/i);
     console.log(header);
@@ -28,17 +26,48 @@ test('renders the contact form header', ()=> {
     expect(h1).toBeInTheDocument();//can also tag with an id and use any of these 
 });
 
-test('renders ONE error message if user enters less then 5 characters into firstname.', async () => {
-    // render(<ContactForm />);
-    
+// const errorMessage = screen.queryAllByText(/error/i);
+
+test('3 renders ONE error message if user enters less then 5 characters into firstname.', async () => {
+    render(<ContactForm />);
+    const firstName = "Ric";
+    const firstNameInput = screen.getByLabelText(/first name/i);
+    userEvent.type(firstNameInput, firstName);
+    const errorMessage = screen.queryAllByText(/error/i);
+    expect(errorMessage).toHaveLength(1);
+    expect(errorMessage).toBeTruthy();//same thing
 });
 
-test('renders THREE error messages if user enters no values into any fields.', async () => {
-    
+
+test('4 renders THREE error messages if user enters no values into any fields.', async () => {
+    render(<ContactForm />);
+    const submitButton = screen.getByRole('button');//arrange 
+    userEvent.click(submitButton);
+    const errorMessages = screen.queryAllByTestId(/error/i);
+    expect(errorMessages).toHaveLength(3);
+
 });
 
-test('renders ONE error message if user enters a valid first name and last name but no email.', async () => {
-    
+test('5 renders ONE error message if user enters a valid first name and last name but no email.', async () => {
+    render(<ContactForm />);
+    //enters first name
+    const firstName = "Ricster";
+    const firstNameInput = screen.getByLabelText(/first name/i);
+    userEvent.type(firstNameInput, firstName);
+    //enters last name
+    const lastName = "Mansfield";
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    userEvent.type(lastNameInput, lastName);
+    //uses submit button before entering email
+    const button = screen.getByRole('button');
+	userEvent.click(button);
+    //should see error for email
+    const errorMessages = screen.queryAllByText(/error/i);
+	expect(errorMessages).toHaveLength(1);
+    //alternative check for email error message using preestablished variable from test 4
+    const emailErrorMessage = screen.queryAllByTestId(/error/i);
+    expect(emailErrorMessage).toHaveLength(1);
+
 });
 
 test('renders "email must be a valid email address" if an invalid email is entered', async () => {
