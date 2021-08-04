@@ -17,12 +17,16 @@ it('renders without errors', ()=>{
 test('renders the contact form header', ()=> {
     render(<ContactForm />);
 	const header = screen.queryByText(/contact form/i);
-    // console.log(header);
+    console.log(header);
 	expect(header).toBeInTheDocument();//can use either
     expect(header).toBeVisible();//can use either one
+    const h1 = screen.queryByTestId('testh1');
+ 
+    expect(h1).toBeInTheDocument();//can also tag with an id and use any of these 
 });
 
 test('renders ONE error message if user enters less then 5 characters into firstname.', async () => {
+    // render(<ContactForm />);
     
 });
 
