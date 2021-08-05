@@ -81,3 +81,5 @@ As a developer, you will be writing tests for every component. As we've learned,
   - [Regex](https://regexr.com)
   - [jest](https://jestjs.io/docs/en/expect.html)
   - [WAI-ARIA Roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) This page lists reference pages covering all the WAI-ARIA roles discussed on MDN
+  - [Warren's Notes on spread, chaining, dot operations](public\zoom_0.mp4)
+  - 
