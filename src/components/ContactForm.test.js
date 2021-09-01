@@ -31,11 +31,17 @@ test('2 renders the contact form header', ()=> {
 test('3 renders ONE error message if user enters less then 5 characters into firstname.', async () => {
     render(<ContactForm />);
     const firstName = "Ric";
-    const firstNameInput = screen.getByLabelText(/first name/i);
-    userEvent.type(firstNameInput, firstName);
-    const errorMessage = screen.queryAllByText(/error/i);
-    expect(errorMessage).toHaveLength(1);
-    expect(errorMessage).toBeTruthy();//same thing
+    const firstNameInput = screen.queryByLabelText(/first Name/i);
+    userEvent.type(firstNameInput, firstName);//find filed then fill it in
+    
+    const errorMessageA = screen.queryAllByText(/error/i); //
+    expect(errorMessageA).toHaveLength(1);
+    expect(errorMessageA).toBeTruthy();
+    //Alternative method
+    const errorMessageB = screen.queryByTestId('error');
+    expect(errorMessageB).toBeInTheDocument();
+    expect(errorMessageB).toBeTruthy();
+    /same thing
 });
 
 
