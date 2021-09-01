@@ -41,7 +41,7 @@ test('3 renders ONE error message if user enters less then 5 characters into fir
     const errorMessageB = screen.queryByTestId('error');
     expect(errorMessageB).toBeInTheDocument();
     expect(errorMessageB).toBeTruthy();
-    /same thing
+    
 });
 
 
