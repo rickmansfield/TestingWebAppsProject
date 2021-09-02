@@ -84,13 +84,17 @@ test('6 renders "email must be a valid email address" if an invalid email is ent
     //Arrange = create bad email and retrieve email input field
     const email = 'badEmail';
     const emailInput = screen.getByLabelText(/email/i);
-    //Act = input bad email into field just like a user might do & use submitt button
+    //Act = input bad email into field just like a user might do & use submitt button (it renders with out clicking the button too)
     userEvent.type(emailInput, email);
     const submitButton = screen.getByRole('button');//arrange 
     userEvent.click(submitButton);
     //Assert = expect to get error message for email
     const errorMessage = screen.queryByText(/email must be a valid email address/i);
 	expect(errorMessage).toBeVisible();
+    //alternatively
+    const errorMessageA = screen.queryAllByText(/error/i);
+    expect(errorMessageA).toHaveLength(1);
+    expect(errorMessageA).toBeTruthy();
 
 });
 
